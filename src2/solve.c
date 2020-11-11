@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgueifao <mgueifao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fheaton- <fheaton-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:20:02 by fheaton-          #+#    #+#             */
-/*   Updated: 2020/11/11 20:53:25 by mgueifao         ###   ########.fr       */
+/*   Updated: 2020/11/11 22:00:28 by fheaton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,4 @@ void	check_g_error(void)
 		ft_putstr("Error map\n");
 	else if (g_error > 1)
 		ft_putstr("Error\n");
-}
-
-void		solve(int fd)
-{
-	read_map(fd);
-	if(g_error != 0)
-	{
-		check_g_error();
-	}
 }
