@@ -3,28 +3,39 @@ CFLAGS = -Wall -Werror -Wextra
 
 EXEC = bsq
 
-BIN_DIR = bin
-SRC_DIR = src
+BIN_DIR = .
+SRC_DIR = src2
 INC_DIR = inc
 OBJ_DIR = obj
 
-bsq.o = bsq.h
+main.o = header.h
+map.o = header.h
+process.o = header.h
+reader.o = header.h
+solve.o = header.h
+str.o = header.h
+write_map.o = header.h
 
-OBJ = bsq.o
+OBJ = main.o map.o process.o reader.o solve.o str.o write_map.o
 
 vpath %.o $(OBJ_DIR)
 vpath %.h $(INC_DIR)
 vpath %.c $(SRC_DIR)
 
+.PHONY : clean fclean re all
+
 all : $(EXEC)
 
-$(EXEC) : $(OBJ_CLIENT)
+$(EXEC) : $(OBJ)
 	$(CC) -g $(addprefix $(OBJ_DIR)/, $(OBJ)) -o $(BIN_DIR)/$@
 
 %.o : %.c $($@)
 	$(CC) -g -c $< -I $(INC_DIR) -o $(OBJ_DIR)/$@
 
-.PHONY : clean
 clean :
-	find $(OBJ_DIR) -type f -delete
-	find $(BIN_DIR) -type f -delete
+	rm -f $(addprefix $(OBJ_DIR)/, $(OBJ))
+
+fclean : clean
+	rm -f $(EXEC)
+
+re : fclean all
