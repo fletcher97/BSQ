@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fheaton- <fheaton-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgueifao <mgueifao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 23:33:03 by fheaton-          #+#    #+#             */
-/*   Updated: 2020/11/11 20:04:44 by fheaton-         ###   ########.fr       */
+/*   Updated: 2020/11/11 20:42:30 by mgueifao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		write_map(t_map *map)
 {
 	int a;
 	int b;
+	int c;
 
 	a = -1;
 	b = -1;
@@ -25,22 +26,31 @@ int		write_map(t_map *map)
 	{
 		while (++a < map->width)
 		{
-			if (a == 0 && b == 0 && (map->obs_count[a] > map->obs_count[a - 1]))
+			if (a >= (map->pos % map->width) && a <= ((map->pos + map->biggest_size - 1) % map->width)
+				&& b >= (map->pos / map->width) && b <= ((map->pos + (map->biggest_size - 1) * map->width) / map->width))
+				ft_putchar(map->full);
+			else if (a == 0 && b == 0 && (map->obs_count[a] == 1))
 				ft_putchar(map->obstacle);
-			else if (a == 0 && b == 0 && (map->obs_count[a] > map->obs_count[a - 1]))
+			else if (a == 0 && b == 0)
 				ft_putchar(map->empty);
-			if (b == 0 && (map->obs_count[a] > map->obs_count[a - 1]))
+
+			else if (b == 0 && (map->obs_count[a] > map->obs_count[a - 1]))
 				ft_putchar(map->obstacle);
-			else if (b == 0 && !(map->obs_count[a] > map->obs_count[a - 1]))
+			else if (b == 0 && (map->obs_count[a] == map->obs_count[a - 1]))
 				ft_putchar(map->empty);
-			if	(a == 0 && (map->obs_count[a] > map->obs_count[a - 1]))
+			else if	(a == 0 && (map->obs_count[b * map->width] > map->obs_count[(b - 1) * map->width]))
 				ft_putchar(map->obstacle);
-			else if (b == 0 && !(map->obs_count[a] > map->obs_count[a - 1]))
+			else if (a == 0 && (map->obs_count[b * map->width] == map->obs_count[(b - 1) * map->width]))
 				ft_putchar(map->empty);
-			if ((0 < a < (map->width)) && ((0 < b <(map->width)) && ((map->obs_count[a]) > (map->obs_count[a - 1]))))
-				ft_putchar(map->obstacle);
-			else if ((0 < a < (map->width)) && (0 < b <(map->width)) && !((map->obs_count[a]) > (map->obs_count[a - 1])))
-				ft_putchar(map->empty);
+			else
+			{
+				c = map->obs_count[a + b * map->width] - map->obs_count[(a - 1) + b * map->width]
+					- map->obs_count[a + (b - 1) * map->width] + map->obs_count[a - 1 + (b - 1) * map->width];
+				if (c)
+					ft_putchar(map->obstacle);
+				else
+					ft_putchar(map->empty);
+			}
 		}
 		if (a == map->width && b == map->height)
 			ft_putchar('\r');
@@ -48,4 +58,5 @@ int		write_map(t_map *map)
 			ft_putchar('\n');
 		a = -1;
 	}
+	return (1);
 }
