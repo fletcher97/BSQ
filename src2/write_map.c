@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   writefile.c                                        :+:      :+:    :+:   */
+/*   write_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fheaton- <fheaton-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 23:33:03 by fheaton-          #+#    #+#             */
-/*   Updated: 2020/11/11 19:09:59 by fheaton-         ###   ########.fr       */
+/*   Updated: 2020/11/11 19:29:36 by fheaton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,51 @@
 
 extern int g_error;
 
-int		write_file(t_map *map)
+int		write_map(t_map *map)
 {
 	int a;
 	int b;
-	char *str;
 
 	a = -1;
 	b = -1;
-	if (!(str = malloc((map->height) * (map->width))))
-	{
-		return (0);
-		g_error = 2;
-	}
 	while (b++ < map->height)
 	{
 		while (a++ < map->width)
 		{
+			if (a == 0 && b == 0 && (map->obs_count[a] > map->obs_count[a - 1]))
+				ft_putchar(map->obstacle);
+			else if (a == 0 && b == 0 && (map->obs_count[a] > map->obs_count[a - 1]))
+				ft_putchar(map->empty);
 			if (b == 0 && (map->obs_count[a] > map->obs_count[a - 1]))
 			{
-				str[a] = (map->obstacle);
+				ft_putchar(map->obstacle);
 			}
-			else
+			else if (b == 0 && !(map->obs_count[a] > map->obs_count[a - 1]))
 			{
-				str[a] = (map->empty);
+				ft_putchar(map->empty);
 			}
 			if	(a == 0 && (map->obs_count[a] > map->obs_count[a - 1]))
 			{
-				str[a] = (map->obstacle);
+				ft_putchar(map->obstacle);
 			}
-			else
+			else if (b == 0 && !(map->obs_count[a] > map->obs_count[a - 1]))
 			{
-				str[a] = (map->empty);
+				ft_putchar(map->empty);
 			}
 			if ((0 < a < (map->width)) && ((0 < b <(map->width)) && ((map->obs_count[a]) > (map->obs_count[a - 1]))))
 			{
-				str[a] = (map->obstacle);
+				ft_putchar(map->obstacle);
 			}
-			else
+			else if ((0 < a < (map->width)) && (0 < b <(map->width)) && !((map->obs_count[a]) > (map->obs_count[a - 1])))
 			{
-				str[a] = (map->empty);
+				ft_putchar(map->empty);
 			}
-			a++;
 		}
-		b++;
+		if (a == map->width)
+		{
+			ft_putchar('\n');
+			a = 0;
+		}
 	}
 	
 }
