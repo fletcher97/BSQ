@@ -28,6 +28,8 @@ char	*read_line(int fd, int pos)
 		g_error = 3;
 	if (i == -1)
 		return (NULL);
+	if (!i && pos == 0)
+		return (NULL);
 	if (!i || c == '\n' || c == '\r')
 	{
 		if (!(line = malloc(pos + 1)))
@@ -107,18 +109,12 @@ t_map	*read_map(int fd)
 	i = -1;
 	while (++i < map->height && (line = read_line(fd, 0)))
 		if (!add_line(map, line, i))
-		{
-			if (map->obs_count)
-				free(map->obs_count);
-			free(map);
 			return (NULL);
-		}
 	if (g_error != 0)
 		return (NULL);
-	while (line = read_line(fd, 0))
+	while ((line = read_line(fd, 0)))
 		if (str_len(line) > 0)
 		{
-			clear_map(map);
 			return (NULL);
 		}
 	if (g_error != 0)

@@ -34,9 +34,11 @@ static t_map	*new_map()
 static t_map	*set_params(t_map *map, char *params)
 {
 	int i;
+	int size;
 
 	i = 0;
-	while (params[i] >= '0' && params[i] <= '9')
+	size = str_len(params);
+	while (params[i] >= '0' && params[i] <= '9' && i < size - 3)
 		map->height = (map->height * 10) + (params[i++] - '0');
 	if (map->height <= 0)
 	{
@@ -85,18 +87,23 @@ t_map	*init(int fd)
 	return (map);
 }
 
-t_map	*read_solve_map(int fd)
+int	read_solve_map(int fd)
 {
 	t_map	*map;
 
 	if(!(map = read_map(fd)))
-		return (NULL);
+		return (0);
 	if (map->valid < 0)
 	{
 		if(map->obs_count)
 			free(map->obs_count);
 		free(map);
-		return (NULL);
+		g_error = 1;
+		return (0);
 	}
-	return (map);
+	process(map);
+	write_map(map);
+	free(map->obs_count);
+	free(map);
+	return (1);
 }

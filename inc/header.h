@@ -38,7 +38,7 @@ extern int	g_error;
 */
 
 t_map	*init(int fd);
-t_map	*read_solve_map(int fd);
+int		read_solve_map(int fd);
 
 /*
 ** process.c
@@ -51,6 +51,7 @@ int	process(t_map *map);
 */
 
 int	str_len(char *str);
+void ft_putstr(char *c);
 
 /*
 ** reader.c
@@ -58,5 +59,17 @@ int	str_len(char *str);
 
 t_map	*read_map(int fd);
 char	*read_line(int fd, int pos);
+
+/*
+** solver.c
+*/
+
+void	check_g_error(void);
+
+/*
+** writefile.c
+*/
+
+int		write_map(t_map *map);
 
 #endif
