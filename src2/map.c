@@ -1,8 +1,4 @@
-#include "map.h"
-#include "str.h"
-#include "reader.h"
-
-int	g_error;
+#include "header.h"
 
 /*
 ** Creates a new t_map struct and initializes all values with 0.
@@ -27,7 +23,6 @@ static t_map	*new_map()
 	map->width = 0;
 	map->biggest_size = 0;
 	map->pos = 0;
-	map->next_pos = 0;
 	map->valid = 0;
 	return (map);
 }
@@ -71,7 +66,6 @@ t_map	*init(int fd)
 {
 	char	*params;
 	t_map	*map;
-	int i;
 
 	if (!(map = new_map()))
 		return (NULL);
@@ -94,7 +88,6 @@ t_map	*init(int fd)
 t_map	*read_solve_map(int fd)
 {
 	t_map	*map;
-	int		flag;
 
 	if(!(map = read_map(fd)))
 		return (NULL);
