@@ -83,6 +83,7 @@ void		ft_putchar(char c);
 
 t_map		*read_map(int fd);
 char		*read_line(int fd, int pos);
+int			clear_map(t_map *map);
 
 /*
 ** solver.c

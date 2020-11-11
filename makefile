@@ -12,11 +12,12 @@ main.o = header.h
 map.o = header.h
 process.o = header.h
 reader.o = header.h
+reader2.o = header.h
 solve.o = header.h
 str.o = header.h
 write_map.o = header.h
 
-OBJ = main.o map.o process.o reader.o solve.o str.o write_map.o
+OBJ = main.o map.o process.o reader.o reader2.o solve.o str.o write_map.o
 
 vpath %.o $(OBJ_DIR)
 vpath %.h $(INC_DIR)
@@ -30,7 +31,7 @@ $(EXEC) : $(OBJ)
 	$(CC) $(addprefix $(OBJ_DIR)/, $(OBJ)) -o $(BIN_DIR)/$@
 
 %.o : %.c $($@)
-	$(CC) -g -c $< -I $(INC_DIR) -o $(OBJ_DIR)/$@
+	$(CC) -c $< -I $(INC_DIR) -o $(OBJ_DIR)/$@
 
 clean :
 	rm -f $(addprefix $(OBJ_DIR)/, $(OBJ))
