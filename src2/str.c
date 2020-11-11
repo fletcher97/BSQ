@@ -30,9 +30,7 @@ void ft_putstr(char *c)
 {
 	int a;
 
-	a = 0;
-	while (c[a])
-	{
+	a = -1;
+	while (c[++a])
 		ft_putchar(c[a]);
-	}
 }
