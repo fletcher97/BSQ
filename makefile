@@ -28,10 +28,10 @@ vpath %.c $(SRC_DIR)
 all : $(EXEC)
 
 $(EXEC) : $(OBJ)
-	$(CC) $(addprefix $(OBJ_DIR)/, $(OBJ)) -o $(BIN_DIR)/$@
+	$(CC) $(CFLAGS) $(addprefix $(OBJ_DIR)/, $(OBJ)) -o $(BIN_DIR)/$@
 
 %.o : %.c $($@)
-	$(CC) -c $< -I $(INC_DIR) -o $(OBJ_DIR)/$@
+	$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -o $(OBJ_DIR)/$@
 
 clean :
 	rm -f $(addprefix $(OBJ_DIR)/, $(OBJ))
