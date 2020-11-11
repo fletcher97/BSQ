@@ -45,30 +45,6 @@ int process(t_map *map, char *line, int depth)
 	return (check_placements(map, depth));
 }
 
-int	first_line(t_map *map, char *line)
-{
-	int i;
-
-	if(!(map->obs_count = malloc(map->height * str_len(line))))
-	{
-		free(map);
-		g_error = 2;
-		return (0);
-	}
-	i = -1;
-	while (line[++i])
-	{
-		if (line[i] != map->obstacle && line[i] != map->empty)
-			return (clear_map(map));
-		if (i == 0)
-			map->obs_count[i] = (line[i] == map->obstacle ? 1 : 0);
-		else
-			map->obs_count[i] = (line[i] == map->obstacle ? 1 : 0) +\
-				map->obs_count[i - 1];
-	}
-	return (1);
-}
-
 /*
 ** check possible square placement
 */
