@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgueifao <mgueifao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fheaton- <fheaton-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 21:14:22 by mgueifao          #+#    #+#             */
-/*   Updated: 2020/11/11 21:14:22 by mgueifao         ###   ########.fr       */
+/*   Updated: 2020/11/11 23:34:33 by fheaton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,18 @@ int	check(int r, int c, t_map *map)
 		return (3);
 	if (c + map->biggest_size >= map->width)
 		return (2);
-	current = map->obs_count[c + map->biggest_size + ((r + map->biggest_size) * map->width)];
+	current = map->obs_count[c + map->biggest_size\
+		+ ((r + map->biggest_size) * map->width)];
 	if (c == 0 && r == 0 && current != 0)
 		return (1);
-	else if (c != 0 && r == 0 && (current - map->obs_count[(c - 1) + (r + map->biggest_size) * map->width]))
+	else if (c != 0 && r == 0 && (current - map->obs_count[(c - 1)\
+		+ (r + map->biggest_size) * map->width]))
 		return (1);
-	else if (c == 0 && r != 0 && (current - map->obs_count[c + map->biggest_size + (r - 1) * map->width]))
+	else if (c == 0 && r != 0 && (current - map->obs_count[c\
+		+ map->biggest_size + (r - 1) * map->width]))
 		return (1);
-	else if (c != 0 && r != 0 && (((current - (map->obs_count[(c - 1) + (r + map->biggest_size) * map->width]))\
+	else if (c != 0 && r != 0 && (((current - (map->obs_count[(c - 1)\
+		+ (r + map->biggest_size) * map->width]))\
 		- (map->obs_count[c + map->biggest_size + (r - 1) * map->width]))\
 		+ (map->obs_count[c - 1 + (r - 1) * map->width])))
 		return (1);
@@ -47,7 +51,7 @@ int	process(t_map *map)
 		j = -1;
 		done = 0;
 		while (++j < map->width && done < 2)
-			while(!(done = check(i, j, map)))
+			while (!(done = check(i, j, map)))
 			{
 				map->biggest_size++;
 				map->pos = i * map->width + j;
