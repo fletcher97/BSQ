@@ -52,6 +52,7 @@ int	process(t_map *map);
 
 int	str_len(char *str);
 void ft_putstr(char *c);
+void ft_putchar(char c);
 
 /*
 ** reader.c
