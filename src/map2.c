@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map2.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fheaton- <fheaton-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/11 11:38:15 by fheaton-          #+#    #+#             */
+/*   Updated: 2020/11/11 11:38:15 by fheaton-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "map.h"
 #include "str.h"
 
@@ -80,7 +92,7 @@ t_map	*set_params(t_map *map, char *params)
 	if (params[i])
 		map->obstacle = params[i++];
 	if (params[i])
-		map->obstacle = params[i++];
+		map->full = params[i++];
 	if (params[i] || !map->empty || !map->obstacle || !map->full ||\
 		map->empty == map->obstacle || map->empty == map->full ||\
 		map->obstacle == map->full)
