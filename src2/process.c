@@ -1,4 +1,26 @@
-#include "map.h"
+#include "header.h"
+
+int	check(int r, int c, t_map *map)
+{
+	int current;
+
+	if (r + map->biggest_size >= map->height)
+		return (3);
+	if (c + map->biggest_size >= map->width)
+		return (2);
+	current = map->obs_count[c + map->biggest_size + ((r + map->biggest_size) * map->width)];
+	if (c == 0 && r == 0 && current != 0)
+		return (1);
+	else if (c != 0 && r == 0 && (current - map->obs_count[(c - 1) + (r + map->biggest_size) * map->width]))
+		return (1);
+	else if (c == 0 && r != 0 && (current - map->obs_count[c + map->biggest_size + (r - 1) * map->width]))
+		return (1);
+	else if (c != 0 && r != 0 && (((current - (map->obs_count[(c - 1) + (r + map->biggest_size) * map->width]))\
+		- (map->obs_count[c + map->biggest_size + (r - 1) * map->width]))\
+		+ (map->obs_count[c - 1 + (r - 1) * map->width])))
+		return (1);
+	return (0);
+}
 
 int	process(t_map *map)
 {
@@ -19,27 +41,5 @@ int	process(t_map *map)
 				map->pos = i * map->width + j;
 			}
 	}
-}
-
-int	check(int r, int c, t_map *map)
-{
-	int current;
-
-	if (r + map->biggest_size > map->height)
-		return (3);
-	if (c + map->biggest_size > map->width)
-		return (2);
-	current = map->obs_count[c + map->biggest_size + ((r + map->biggest_size) * map->width)];
-	if (c == 0 && r == 0 && current != 0)
-		return (1);
-	if (r == 0 && (current - map->obs_count[(c - 1) + (r + map->biggest_size) * map->width]))
-		return (1);
-	if (c == 0 && (current - map->obs_count[c + map->biggest_size + (r - 1) * map->width]))
-		return (1);
-	if (current - map->obs_count[(c - 1) + (r + map->biggest_size) * map->width]\
-		- map->obs_count[c + map->biggest_size + (r - 1) * map->width]
-		+ map->obs_count[c - 1 + (r - 1) * map->width])
-		return (1);
-	map->pos = r * (map->width) + c;
-	return (0);
+	return (1);
 }
