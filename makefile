@@ -27,7 +27,7 @@ vpath %.c $(SRC_DIR)
 all : $(EXEC)
 
 $(EXEC) : $(OBJ)
-	$(CC) -g $(addprefix $(OBJ_DIR)/, $(OBJ)) -o $(BIN_DIR)/$@
+	$(CC) $(addprefix $(OBJ_DIR)/, $(OBJ)) -o $(BIN_DIR)/$@
 
 %.o : %.c $($@)
 	$(CC) -g -c $< -I $(INC_DIR) -o $(OBJ_DIR)/$@
