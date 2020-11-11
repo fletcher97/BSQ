@@ -33,7 +33,7 @@ char	*read_line(int fd, int pos)
 	{
 		if (!(line = malloc(pos + 1)))
 			g_error = 2;
-		if (g_error == 2)
+		if (g_error != 0)
 			return (NULL);
 		line[pos] = '\0';
 	}
@@ -114,6 +114,16 @@ t_map	*read_map(int fd)
 			free(map);
 			return (NULL);
 		}
+	if (g_error != 0)
+		return (NULL);
+	while (line = read_line(fd, 0))
+		if (str_len(line) > 0)
+		{
+			clear_map(map);
+			return (NULL);
+		}
+	if (g_error != 0)
+		return (NULL);
 	return (map);
 }
 
