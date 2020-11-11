@@ -14,7 +14,6 @@ typedef struct	s_map
 	int width;				//map width
 	int	biggest_size;		//biggest square found so far
 	int pos;				//biggest square's top left corner
-	int next_pos;			//next position to check
 	int valid;				//if the map read so far is valid TODO: check nessecity
 }				t_map;
 
