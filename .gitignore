@@ -2,3 +2,5 @@
 *.ignore
 .vscode
 .DS_Store
+obj/*
+bsq
