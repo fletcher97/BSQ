@@ -1,5 +1,4 @@
-#include "map.h"
-#include "str.h"
+#include "header.h"
 
 int	g_error;
 
@@ -55,7 +54,7 @@ int	add_line(t_map *map, char *line, int i)
 	j = -1;
 	if (i == 0)
 	{
-		if(!(map->obs_count = malloc(map->height * str_len(line))))
+		if(!(map->obs_count = malloc(sizeof(int) * map->height * str_len(line))))
 		{
 			free(map);
 			free(line);
@@ -115,30 +114,4 @@ t_map	*read_map(int fd)
 			return (NULL);
 		}
 	return (map);
-}
-
-
-#include <stdio.h>
-#include <fcntl.h>
-int main(int argc, char const *argv[])
-{
-	printf("test\n");
-	int fd = open("map", O_RDONLY);
-	if(fd != -1)
-	{
-		t_map *map = read_solve_map(fd);
-		printf("%d\n", g_error);
-
-		printf("height: %d\n", map->height);
-		for(int i = 0; i < map->height; i++)
-		{
-			for(int j = 0; j < map->width; j++)
-				printf("%d ", map->obs_count[i * map->width + j]);
-			printf("\n");
-		}
-		close(fd);
-	}else{
-		printf("file nor opened.\n");
-	}
-	return 0;
 }
