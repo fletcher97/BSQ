@@ -6,32 +6,58 @@
 /*   By: fheaton- <fheaton-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 23:33:03 by fheaton-          #+#    #+#             */
-/*   Updated: 2020/11/11 11:55:35 by fheaton-         ###   ########.fr       */
+/*   Updated: 2020/11/11 19:09:59 by fheaton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
-#include "str.h"
-#include "reader.h"
+#include "header.h"
+
+extern int g_error;
 
 int		write_file(t_map *map)
 {
-	char *arr;
 	int a;
-	int malloc_size;
+	int b;
+	char *str;
 
-	if (!(map = read_map(fd)))
+	a = -1;
+	b = -1;
+	if (!(str = malloc((map->height) * (map->width))))
 	{
 		return (0);
+		g_error = 2;
 	}
-	if (!(arr = malloc(malloc_size)))
+	while (b++ < map->height)
 	{
-		return (0);
+		while (a++ < map->width)
+		{
+			if (b == 0 && (map->obs_count[a] > map->obs_count[a - 1]))
+			{
+				str[a] = (map->obstacle);
+			}
+			else
+			{
+				str[a] = (map->empty);
+			}
+			if	(a == 0 && (map->obs_count[a] > map->obs_count[a - 1]))
+			{
+				str[a] = (map->obstacle);
+			}
+			else
+			{
+				str[a] = (map->empty);
+			}
+			if ((0 < a < (map->width)) && ((0 < b <(map->width)) && ((map->obs_count[a]) > (map->obs_count[a - 1]))))
+			{
+				str[a] = (map->obstacle);
+			}
+			else
+			{
+				str[a] = (map->empty);
+			}
+			a++;
+		}
+		b++;
 	}
-	while (read(fd, &arr[a], 1))
-		if ( == map->pos)
-			while (a < size)
-				write(fd, "X", 1);
-		a++;
-	close(fd);
+	
 }
