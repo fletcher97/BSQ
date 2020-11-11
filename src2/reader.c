@@ -29,7 +29,7 @@ char	*read_line(int fd, int pos)
 		g_error = 3;
 	if (i == -1)
 		return (NULL);
-	if (!i || c == '\n')
+	if (!i || c == '\n' || c == '\r')
 	{
 		if (!(line = malloc(pos + 1)))
 			g_error = 2;
@@ -62,6 +62,7 @@ int	add_line(t_map *map, char *line, int i)
 			g_error = 2;
 			return (0);
 		}
+		map->width = str_len(line);
 		while (line[++j])
 		{
 			if (line[j] != map->obstacle && line[j] != map->empty)
@@ -122,17 +123,17 @@ t_map	*read_map(int fd)
 int main(int argc, char const *argv[])
 {
 	printf("test\n");
-	int fd = open("map.txt", O_RDONLY);
+	int fd = open("map", O_RDONLY);
 	if(fd != -1)
 	{
 		t_map *map = read_solve_map(fd);
-		printf("%p\n", map);
+		printf("%d\n", g_error);
 
 		printf("height: %d\n", map->height);
 		for(int i = 0; i < map->height; i++)
 		{
 			for(int j = 0; j < map->width; j++)
-				printf("%d\t", map->obs_count[i * map->width + j]);
+				printf("%d ", map->obs_count[i * map->width + j]);
 			printf("\n");
 		}
 		close(fd);

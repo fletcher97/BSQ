@@ -53,7 +53,7 @@ static t_map	*set_params(t_map *map, char *params)
 	if (params[i])
 		map->obstacle = params[i++];
 	if (params[i])
-		map->obstacle = params[i++];
+		map->full = params[i++];
 	if (params[i] || !map->empty || !map->obstacle || !map->full ||\
 		map->empty == map->obstacle || map->empty == map->full ||\
 		map->obstacle == map->full)
@@ -98,7 +98,7 @@ t_map	*read_solve_map(int fd)
 
 	if(!(map = read_map(fd)))
 		return (NULL);
-	if (map->valid < 1)
+	if (map->valid < 0)
 	{
 		if(map->obs_count)
 			free(map->obs_count);
