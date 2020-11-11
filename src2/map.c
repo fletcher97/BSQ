@@ -6,7 +6,7 @@
 /*   By: mgueifao <mgueifao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 21:13:52 by mgueifao          #+#    #+#             */
-/*   Updated: 2020/11/11 21:13:52 by mgueifao         ###   ########.fr       */
+/*   Updated: 2020/11/11 23:38:04 by mgueifao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** Returnss NULL if the memory couldn't be allocated.
 */
 
-static t_map	*new_map()
+static t_map	*new_map(void)
 {
 	t_map	*map;
 
@@ -76,7 +76,7 @@ static t_map	*set_params(t_map *map, char *params)
 ** Returns NULL if memory can't be allocated or the parameters are wrong.
 */
 
-t_map	*init(int fd)
+t_map			*init(int fd)
 {
 	char	*params;
 	t_map	*map;
@@ -99,15 +99,15 @@ t_map	*init(int fd)
 	return (map);
 }
 
-int	read_solve_map(int fd)
+int				read_solve_map(int fd)
 {
 	t_map	*map;
 
-	if(!(map = read_map(fd)))
+	if (!(map = read_map(fd)))
 		return (0);
 	if (map->valid < 0)
 	{
-		if(map->obs_count)
+		if (map->obs_count)
 			free(map->obs_count);
 		free(map);
 		g_error = 1;
