@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fheaton- <fheaton-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgueifao <mgueifao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:20:02 by fheaton-          #+#    #+#             */
-/*   Updated: 2020/11/11 16:48:53 by fheaton-         ###   ########.fr       */
+/*   Updated: 2020/11/11 19:03:34 by mgueifao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
-#include "str.h"
-#include "reader.h"
+#include "header.h"
 
 extern int	g_error;
 
