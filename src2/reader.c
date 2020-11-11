@@ -52,7 +52,6 @@ int	add_line(t_map *map, char *line, int i)
 {
 	int j;
 
-	//first line
 	j = -1;
 	if (i == 0)
 	{
@@ -74,11 +73,18 @@ int	add_line(t_map *map, char *line, int i)
 			map->obs_count[j] = (line[j] == map->obstacle ? 1 : 0);
 			if (j != 0)
 				map->obs_count[j] += map->obs_count[j - 1];
+			if (map->obs_count[j])
+				map->valid = 1;
 		}
 	return (1);
 	}
 	else
 	{
+		if (str_len(line) != map->width)
+		{
+			free(line);
+			return (clear_map(map));
+		}
 		while (line[++j])
 		{
 			if (line[j] != map->obstacle && line[j] != map->empty)
@@ -92,6 +98,8 @@ int	add_line(t_map *map, char *line, int i)
 			else
 				map->obs_count[j + map->width * i] += map->obs_count[j + map->width * (i - 1)]\
 					+map->obs_count[j + map->width * i - 1] - map->obs_count[j + map->width * (i - 1) - 1];
+			if (map->obs_count[j + map->width * i])
+				map->valid = 1;
 		}
 	}
 	free(line);
@@ -110,11 +118,19 @@ t_map	*read_map(int fd)
 	while (++i < map->height && (line = read_line(fd, 0)))
 		if (!add_line(map, line, i))
 			return (NULL);
+	if (i < map->height)
+		g_error = 1;
+	if (!map->valid)
+	{
+		g_error = 1;
+		clear_map(map);
+	}
 	if (g_error != 0)
 		return (NULL);
 	while ((line = read_line(fd, 0)))
 		if (str_len(line) > 0)
 		{
+			g_error = 1;
 			return (NULL);
 		}
 	if (g_error != 0)

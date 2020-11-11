@@ -6,7 +6,7 @@
 /*   By: mgueifao <mgueifao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:20:02 by fheaton-          #+#    #+#             */
-/*   Updated: 2020/11/11 20:04:02 by mgueifao         ###   ########.fr       */
+/*   Updated: 2020/11/11 20:53:25 by mgueifao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ extern int	g_error;
 void	check_g_error(void)
 {
 	if (g_error == 1)
-		ft_putstr("Error map");
+		ft_putstr("Error map\n");
 	else if (g_error > 1)
-		ft_putstr("Error");
-	else
-		ft_putstr("\n");
+		ft_putstr("Error\n");
 }
 
 void		solve(int fd)
