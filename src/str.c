@@ -6,7 +6,7 @@
 /*   By: mgueifao <mgueifao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:39:37 by fheaton-          #+#    #+#             */
-/*   Updated: 2020/11/12 11:30:08 by mgueifao         ###   ########.fr       */
+/*   Updated: 2020/11/12 12:30:12 by mgueifao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	write_buff(char *buff, t_map *map)
 char	*gen_buff(t_map *map)
 {
 	char *buff;
-	if(!(buff = malloc((map->width + 1) * map->height + 1)))
+
+	if (!(buff = malloc((map->width + 1) * map->height + 1)))
 		return (NULL);
 	buff[(map->width + 1) * map->height] = '\0';
 	return (buff);
