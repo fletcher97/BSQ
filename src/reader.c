@@ -6,7 +6,7 @@
 /*   By: mgueifao <mgueifao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 22:23:35 by mgueifao          #+#    #+#             */
-/*   Updated: 2020/11/12 10:59:31 by mgueifao         ###   ########.fr       */
+/*   Updated: 2020/11/12 16:28:12 by mgueifao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ int		add_first_line(t_map *map, char *line)
 		map->obs_count[j] = (line[j] == map->obstacle ? 1 : 0);
 		if (j != 0)
 			map->obs_count[j] += map->obs_count[j - 1];
-		if (map->obs_count[j])
-			map->valid = 1;
 	}
 	return (1);
 }
@@ -99,8 +97,6 @@ int		add_n_line(t_map *map, char *line, int i, int j)
 			map->obs_count[j + map->width * i] += map->obs_count[j + map->width\
 				* (i - 1)] + map->obs_count[j + map->width * i - 1] -\
 				map->obs_count[j + map->width * (i - 1) - 1];
-		if (map->obs_count[j + map->width * i])
-			map->valid = 1;
 	}
 	return (1);
 }
@@ -133,10 +129,8 @@ t_map	*read_map(int fd)
 	while (++i < map->height && (line = read_line(fd, 0)))
 		if (!add_line(map, line, i))
 			return (NULL);
-	if (i < map->height || !map->valid)
+	if (i < map->height)
 		g_error = 1;
-	if (!map->valid)
-		clear_map(map);
 	if (g_error != 0)
 		return (NULL);
 	while ((line = read_line(fd, 0)))
