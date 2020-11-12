@@ -4,7 +4,7 @@ CFLAGS = -Wall -Werror -Wextra
 EXEC = bsq
 
 BIN_DIR = .
-SRC_DIR = src2
+SRC_DIR = src
 INC_DIR = inc
 OBJ_DIR = obj
 
