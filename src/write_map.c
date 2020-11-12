@@ -6,7 +6,7 @@
 /*   By: mgueifao <mgueifao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 23:33:03 by fheaton-          #+#    #+#             */
-/*   Updated: 2020/11/11 23:44:26 by mgueifao         ###   ########.fr       */
+/*   Updated: 2020/11/12 11:28:48 by mgueifao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,38 +47,42 @@ int		put_empty(int a, int b, t_map *map)
 		return (0);
 }
 
-void	put_rest(int a, int b, t_map *map)
+void	put_rest(int a, int b, t_map *map, char *buff)
 {
 	if (map->obs_count[a + b * map->width]\
 		- map->obs_count[(a - 1) + b * map->width]
 		- map->obs_count[a + (b - 1) * map->width] + map->obs_count[a\
 		- 1 + (b - 1) * map->width])
-		ft_putchar(map->obstacle);
+		buff[b * (map->width + 1) + a] = map->obstacle;//ft_putchar(map->obstacle);
 	else
-		ft_putchar(map->empty);
+		buff[b * (map->width + 1) + a] = map->empty;//ft_putchar(map->empty);
 }
 
 int		write_map(t_map *map)
 {
-	int a;
-	int b;
+	int		a;
+	int		b;
+	char	*buff;
 
 	b = -1;
+	if (!(buff = gen_buff(map)))
+		return (0);
 	while (++b < map->height)
 	{
 		a = -1;
 		while (++a < map->width)
 		{
 			if (put_full(a, b, map))
-				ft_putchar(map->full);
+				buff[b * (map->width + 1) + a] = map->full;// ft_putchar(map->full);
 			else if (put_obstacle(a, b, map))
-				ft_putchar(map->obstacle);
+				buff[b * (map->width + 1) + a] = map->obstacle;//ft_putchar(map->obstacle);
 			else if (put_empty(a, b, map))
-				ft_putchar(map->empty);
+				buff[b * (map->width + 1) + a] = map->empty;//ft_putchar(map->empty);
 			else
-				put_rest(a, b, map);
+				put_rest(a, b, map, buff);
 		}
-		ft_putchar('\n');
+		buff[b * (map->width + 1) + a] = '\n';//ft_putchar('\n');
 	}
+	write_buff(buff, map);
 	return (1);
 }

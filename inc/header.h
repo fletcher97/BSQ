@@ -6,7 +6,7 @@
 /*   By: mgueifao <mgueifao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 22:04:43 by fheaton-          #+#    #+#             */
-/*   Updated: 2020/11/11 23:34:53 by mgueifao         ###   ########.fr       */
+/*   Updated: 2020/11/12 11:28:41 by mgueifao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int				process(t_map *map);
 int				str_len(char *str);
 void			ft_putstr(char *c);
 void			ft_putchar(char c);
+char			*gen_buff(t_map *map);
+void			write_buff(char *buff, t_map *map);
 
 /*
 ** reader.c
