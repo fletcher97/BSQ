@@ -6,7 +6,7 @@
 /*   By: mgueifao <mgueifao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 22:23:35 by mgueifao          #+#    #+#             */
-/*   Updated: 2020/11/11 22:56:54 by mgueifao         ###   ########.fr       */
+/*   Updated: 2020/11/12 10:59:31 by mgueifao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,14 @@ int		add_n_line(t_map *map, char *line, int i, int j)
 
 int		add_line(t_map *map, char *line, int i)
 {
+	int ret;
+
 	if (i == 0)
-		return (add_first_line(map, line));
+	{
+		ret = add_first_line(map, line);
+		free(line);
+		return (ret);
+	}
 	else if (!(add_n_line(map, line, i, -1)))
 		return (0);
 	free(line);
